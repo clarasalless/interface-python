@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from tkinter import filedialog
 from tkinter import messagebox
+from PIL import Image
 
 
 # Definição de funções
@@ -56,22 +57,31 @@ class MyFrame(ctk.CTkFrame):
 
         # add widgets onto the frame, for example:
         self.checkbox = ctk.CTkCheckBox(
-            self, text="", command=lambda: disableButton(self.btn))
+            self, text='', command=lambda: disableButton(self.btn), height=35, width=25)
         self.checkbox.pack(padx=10, pady=10, side=ctk.LEFT, anchor=ctk.N)
 
+        self.address = ctk.CTkTextbox(self, height=35, width=60)
+        self.address.pack(expand=True, padx=10, pady=10,
+                          side=ctk.LEFT, anchor=ctk.N)
+
         self.btn = ctk.CTkButton(
-            self, text="Escolher Arquivo", state=ctk.DISABLED, command=lambda: selecionaArquivo(self, self.text))
+            self, text="Escolher Arquivo", state=ctk.DISABLED, height=35, command=lambda: selecionaArquivo(self, self.text))
         self.btn.pack(pady=10, padx=10, side=ctk.LEFT, anchor=ctk.N)
 
-        self.text = ctk.CTkTextbox(self, height=1)
-        self.text.pack(expand=True, padx=10, pady=10,
-                       ipady=2, side=ctk.LEFT, anchor=ctk.N)
+        self.file = ctk.CTkTextbox(self, height=35)
+        self.file.pack(expand=True, padx=10, pady=10,
+                       side=ctk.LEFT, anchor=ctk.N)
+
+        img = ctk.CTkImage(Image.open('excluir.png'), size=(20, 20))
+        self.bin = ctk.CTkButton(
+            self, text='', image=img, width=35, height=35)
+        self.bin.pack(pady=10, padx=10, side=ctk.LEFT, anchor=ctk.N)
 
 
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.geometry("540x320")
+        self.geometry("600x400")
         self.title("Essa é a minha janela")
         self.iconbitmap("weg-logo-5.ico")
 
