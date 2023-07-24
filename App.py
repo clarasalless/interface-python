@@ -1,4 +1,5 @@
 import customtkinter as ctk
+import tkinter as tk
 from tkinter import messagebox
 from myframe import MyFrame
 from InitFrame import InitFrame
@@ -31,6 +32,14 @@ class App(ctk.CTk):
         self.generate_binary = ctk.CTkButton(
             self, text="Gerar Binário", command=gerarbinario)
         self.generate_binary.pack(pady=10, padx=10)
+        menubar = tk.Menu(self)
+        filemenu = tk.Menu(menubar, tearoff=0)
+        filemenu.add_command(label="Open")
+        filemenu.add_command(label="Save")
+
+        menubar.add_cascade(label="File", menu=filemenu)
+        self.config(menu=menubar)
+
 
 
 app = App()
