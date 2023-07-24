@@ -35,12 +35,15 @@ def delFrame(frame):
     Retira o respectivo frame seletor da janela 
     '''
     frame.pack_forget()
+    MyFrame.all.remove(frame)
 
 
 class MyFrame(ctk.CTkFrame):
     '''
     Cria novo frame com widgets para seleção de arquivos 
     '''
+
+    all = []
 
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
