@@ -4,6 +4,7 @@ from tkinter import filedialog
 from tkinter import messagebox
 from myframe import MyFrame
 from InitFrame import InitFrame
+from MenuFrame import MenuFrame
 
 
 # aparêcia
@@ -57,6 +58,9 @@ class App(ctk.CTk):
         self.title("Seleção de Arquivos")
         self.iconbitmap("img\weg-logo-5.ico")
 
+        self.menu = MenuFrame(master=self)
+        self.menu.pack(fill=ctk.BOTH)
+
         # frame global que contém todos os seletores de arquivos
         self.init_frame = InitFrame(
             master=self, corner_radius=0, fg_color="transparent")
@@ -68,12 +72,12 @@ class App(ctk.CTk):
         self.generate_binary.pack(pady=10, padx=10)
 
         # menubar
-        self.menubar = tk.Menu(self, background='blue')
-        self.filemenu = tk.Menu(self.menubar, tearoff=0)
-        self.filemenu.add_command(label="Abrir arquivo", command=onOpen)
-        self.filemenu.add_command(label="Salvar", command=onSave)
-        self.menubar.add_cascade(label="Arquivo", menu=self.filemenu)
-        self.config(menu=self.menubar)
+        # self.menubar = tk.Menu(self, background='blue')
+        # self.filemenu = tk.Menu(self.menubar, tearoff=0)
+        # self.filemenu.add_command(label="Abrir arquivo", command=onOpen)
+        # self.filemenu.add_command(label="Salvar", command=onSave)
+        # self.menubar.add_cascade(label="Arquivo", menu=self.filemenu)
+        # self.config(menu=self.menubar)
 
 
 # janela funcionando
