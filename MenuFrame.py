@@ -1,6 +1,8 @@
 import customtkinter as ctk
 from tkinter import filedialog
 from PIL import Image
+from myframe import MyFrame
+import xml.etree.ElementTree as ET
 
 
 def onOpen():
@@ -9,7 +11,7 @@ def onOpen():
     '''
     print(filedialog.askopenfilename(initialdir="/", title="Abrir arquivo",
           filetypes=(("Arquivos .lesc", "*.lesc"), ("Todos os arquivos", "*.*"))))
-
+    
 
 def onSave():
     '''
@@ -17,9 +19,22 @@ def onSave():
     '''
     data = [('Arquivos .lesc', '*.lesc')]
     file = filedialog.asksaveasfilename(
-        initialdir="/", title="Salvar como", filetypes=data, defaultextension=data)
-    with open(file, "w") as f:
-        f.write("teste")
+        initialdir="/", title="Salvar como aaa", filetypes=data, defaultextension=data)
+    file = toXML(file)
+    print(file)
+    
+
+def toXML(file):
+    '''
+    Cria um arquivo xml
+    '''
+    xml_doc = ET.Element('App')
+    frames = ET.SubElement(xml_doc, 'frames')
+    for frame in MyFrame.all:
+        ET.SubElement(frames, 'frame', address = frame.address.get(), filepath = frame.file.get(), bin = frame.txt1.get(), hex = frame.txt2.get())
+        
+    tree = ET.ElementTree(xml_doc)
+    tree.write(file)  
 
 
 def fileButtonAction(self):

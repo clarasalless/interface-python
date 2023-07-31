@@ -13,25 +13,6 @@ ctk.set_appearance_mode('light')
 # Definição de funções
 
 
-def onOpen():
-    '''
-    Procurar um arquivo .lesc
-    '''
-    print(filedialog.askopenfilename(initialdir="/", title="Abrir arquivo",
-          filetypes=(("Arquivos .lesc", "*.lesc"), ("Todos os arquivos", "*.*"))))
-
-
-def onSave():
-    '''
-    Salva um arquivo .lesc
-    '''
-    data = [('Arquivos .lesc', '*.lesc')]
-    file = filedialog.asksaveasfilename(
-        initialdir="/", title="Salvar como", filetypes=data, defaultextension=data)
-    with open(file, "w") as f:
-        f.write("teste")
-
-
 def gerarbinario():
     '''
     Função chamada pelo botão gerar binário
