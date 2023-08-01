@@ -21,7 +21,6 @@ def onSave():
     file = filedialog.asksaveasfilename(
         initialdir="/", title="Salvar como aaa", filetypes=data, defaultextension=data)
     file = toXML(file)
-    print(file)
     
 
 def toXML(file):
