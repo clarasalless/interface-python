@@ -36,12 +36,9 @@ def selecionaArquivo(frame):
     frame.file.insert('end', frame.filename)
 
 
-def delFrame(frame):
-    '''
-    Retira o respectivo frame seletor da janela 
-    '''
-    frame.pack_forget()
-    MyFrame.all.remove(frame)
+def clear():
+    for frame in MyFrame.all:
+        frame.delFrame()
 
 
 class MyFrame(ctk.CTkFrame):
@@ -50,9 +47,11 @@ class MyFrame(ctk.CTkFrame):
     '''
 
     all = []
-
+    
+    
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
+        MyFrame.all.append(self)
 
         # checkbox
         self.checkbox = ctk.CTkCheckBox(
@@ -88,5 +87,13 @@ class MyFrame(ctk.CTkFrame):
         # botão para apagar o frame
         img = ctk.CTkImage(Image.open('img\excluir.png'), size=(20, 20))
         self.bin = ctk.CTkButton(
-            self, text='', image=img, width=35, height=35, command=lambda: delFrame(self))
+            self, text='', image=img, width=35, height=35, command=lambda: self.delFrame())
         self.bin.pack(pady=10, padx=10, side=ctk.LEFT, anchor=ctk.N)
+    
+    
+    def delFrame(self):
+        '''
+        Retira o respectivo frame seletor da janela 
+        '''
+        self.all.remove(self)
+        self.pack_forget()
